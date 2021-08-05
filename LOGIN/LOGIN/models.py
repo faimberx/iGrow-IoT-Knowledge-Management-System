@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.contrib.syndication.views import Feed
 
-class Person(models.Model):
+class Person1(models.Model):
     Email=models.CharField(max_length=150)
     Password=models.CharField(max_length=150)
     Username=models.CharField(max_length=150)
@@ -25,7 +25,7 @@ def user_form(sender, instance, created, **kwargs):
         Person.objects.create(user=instance)
         instance.Person.save()
 
-class Feed(models.Model):
+class Feed1(models.Model):
     class Meta:
         db_table = 'Feed'
     Title = models.CharField(max_length=255, blank=True)
@@ -49,7 +49,7 @@ class Feed(models.Model):
     #def __str__(self):
        # return self.Message + ": " + str(self.videofile)
 
-class Group(models.Model):
+class Group1(models.Model):
     class Meta:
         db_table = 'Group'
     Name = models.CharField(max_length=150)
@@ -57,7 +57,7 @@ class Group(models.Model):
     Media = models.FileField(upload_to='uploads/',default="")
     
 
-class Booking(models.Model):
+class Booking1(models.Model):
     class Meta:
         db_table = 'Booking'   
     Name = models.CharField(max_length=150)
@@ -65,7 +65,7 @@ class Booking(models.Model):
     Date = models.DateField()
     Session = models.CharField(max_length=150)
 
-class Workshop(models.Model):
+class Workshop1(models.Model):
     class Meta:
         db_table = 'Workshop'
     ProgrammeName = models.CharField(max_length=150,default="")
@@ -73,20 +73,20 @@ class Workshop(models.Model):
     Date = models.DateField()
     Session = models.CharField(max_length=150)
 
-class SensorData(models.Model):
+class SensorData1(models.Model):
     class Meta:
         db_table = 'SensorData'    
     Detail = models.CharField(max_length=255)
     Name = models.CharField(max_length=150)
 
-class Plants(models.Model):
+class Plants1(models.Model):
     class Meta:
         db_table = 'Plants'
     Pictures = models.ImageField(upload_to='uploads/')
     Species = models.CharField(max_length=150)
     Types = models.CharField(max_length=150)
 
-class Comment(models.Model):
+class Comment1(models.Model):
     class Meta:
         db_table = 'Comment'    
     Message = models.CharField(max_length=255)
