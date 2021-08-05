@@ -1,4 +1,4 @@
-# iGrow Iot Knowledge Management System
+# iGrow IoT Knowledge Management System
 
 Run your database like Xampp or etc
 
