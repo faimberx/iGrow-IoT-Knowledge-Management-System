@@ -21,8 +21,11 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from LOGIN.views import UserReg, sharing, discussion, view, workshop, booking
-from . import views
+from LOGIN.views import UserReg, sharing, discussion, view, workshop, booking, member
+from .import views
+from django.conf.urls import url
+
+from .api import UserList, UserDetail, UserAuthentication
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,14 +44,21 @@ urlpatterns = [
     path('UpdateSharing',views.updateSharing, name="UpdateSharing"),
     path('DeleteSharing', views.deleteSharing, name="DeleteSharing"),
 
-    path('MainGroup',views.mainGroup,name="MainGroup"),
-    path('Group',views.group,name="Group"),
-    path('MyGroup',views.myGroup,name="MyGroup"),
+    path('MainGroup',views.mainGroup, name="MainGroup"),
+    path('Group',views.group, name="Group"),
+    path('MyGroup',views.myGroup, name="MyGroup"),
+
+    path('MainMember', views.mainMember, name="MainMember"),
+    path('Member',views.member, name="Member"),
+    path('MyMember',views.myMember, name="MyMember"),
 
     path('Workshop',views.workshop, name="Workshop"),
     path('Booking',views.booking, name="Booking"),
-    path('CreateWorkshop',views.createWorkshop, name="CreateWorkshop")
+    path('CreateWorkshop',views.createWorkshop, name="CreateWorkshop"),
 
+    url(r'^api/users_list/$', UserList.as_view(), name='user_list'),
+    url(r'^api/users_list/(?P<Person>\d+)/$', UserDetail.as_view(), name='user_list'),
+    url(r'^api/auth/$', UserAuthentication.as_view(), name='User Authentication API') 
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()

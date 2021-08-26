@@ -1,4 +1,4 @@
-from django.contrib.syndication.views import Sharing
+from django.contrib.syndication.views import Feed, Sharing
 from django.template.defaultfilters import truncatewords
 from .models import Post
 from django.urls import reverse

@@ -1,5 +1,6 @@
+from django.http.response import Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from LOGIN.models import Person, Feed, Booking, Workshop, Group
+from LOGIN.models import Person, Feed, Booking, Workshop, Group, Member
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
@@ -111,7 +112,7 @@ def sharing(request):
         return render(request,'sharing.html')
 
 #def viewSharing(request):
-    #eed = Feed.objects.all()
+    #feed = Feed.objects.all()
     #return render(request,'ViewSharing.html',{'feed':feed})  
 
 def updateSharing(request):
@@ -126,7 +127,7 @@ def updateSharing(request):
        f.save()
        return render(request,'ViewSharing.html')
     else:
-        return render(request, 'homepage.html',{'feed': feed})  
+        return render(request, 'homepage.html', {'feed': Feed})
 
 def deleteSharing(request,id):
     sharing = get_object_or_404(sharing, id=id)
@@ -179,6 +180,37 @@ def myGroup(request):
 
 
 
+
+#member
+def mainMember(request):
+    try:
+        member = Member.objects.all()
+        return render(request,'MainMember.html',{'member':member})
+    except Member.DoesNotExist:
+        raise Http404('Data does not exist')
+
+def member(request):
+    if request.method=='POST':
+        Name=request.POST.get('Name')
+        Study=request.POST.get('Study')
+        Lives=request.POST.get('Lives')
+        Member(Name=Name,Study=Study,Lives=Lives).save(),
+        messages.success(request,'The new member ' + request.POST['Name'] + " is create succesfully..!")
+        return render(request,'member.html')
+    else :
+        return render(request,'member.html')
+
+def myMember(request):
+    #try:
+    #    member=Member.objects.filter(Name=request.session['Name'])
+        return render(request,'MyMember.html')#{'member':member})
+    #except Member.DoesNotExist:
+     #   raise Http404('Data does not exist')
+
+
+
+
+
 #discussion
 def viewdiscussion(request):
     if request.method=='POST':
@@ -200,7 +232,6 @@ def discussion(request):
             return redirect('/')
         context ={'form':form}
     return render(request,'group.html')
-
 
 
 
