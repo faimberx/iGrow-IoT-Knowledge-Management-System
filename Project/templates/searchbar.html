@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -64,48 +65,25 @@
             <div class="col-8">
               <body>  
                 {% csrf_token %}
-                          <div class="container my-3 bg-light">
-                            <label for="exampleFormControlTextarea1" style="font-size: 2em;" >Member</label>
-                          </div>
-  
-                          <div class="col-12">
-                            <a href="{% url 'Member' %}" class="link-primary">Friendlist</a> 
-                          </div><tr></tr>
-                          <div class="col-12">
-                            <a href="#" class="link-primary">My Cooperation</a>
-                          </div>
-                          <br/>
-				  <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+<br/>
+                          <form action= "{% url 'searchbar' %}" method="get">
+                            <input type="text" name="search" placeholder="Search member"/>
+                            <button type="submit">Search</button>
+                        </form>
                           {% endblock content %}  
                           {% block body %}
 
-<form action="{% url 'Member' %}" method="POST" class="center">
-  
-        <div class="container">
-          <div class="row">
-            <table class="table caption-top">
-              <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">About</th>
-                  <th scope="col">Media</th>
-                  <th scope="col">Detail</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for member in member %}
-                <tr>
-                  <th scope="row" value="{{ member.Name }}">{{ member.Name }}</th>
-                  <th scope="row" value="{{ member.About }}">{{ member.About }}</th>
-                  <th scope="row" value="{{ member.Media }}">{{ member.Media }}</th>
-                  <td>
-                    <button type="submit" class="btn btn-success " value="Add">Add</button>
-                  </td>
-                </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-      </div>
-</form>
+{{ error }}
+
+{% if Name %}
+    <center><h1>Search Result Found</h1></center>
+    <br>
+{% for i in Name %}
+<center><h2><a href="/InformationMember/{{ i.slug }}"> Name: {{ i.Name}} District: {{ i.District }} State: {{ i.State }} Occupation: {{ i.Occupation}} </a></h2></center>
+{% endfor %}
+    {% else %}
+        <center><h1>Member not found</h1></center>
+{% endif %}
+               
 {% endblock body %}
    </html>

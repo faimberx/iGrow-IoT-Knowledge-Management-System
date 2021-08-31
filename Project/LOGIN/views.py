@@ -207,6 +207,11 @@ def myMember(request):
     #except Member.DoesNotExist:
      #   raise Http404('Data does not exist')
 
+def searchbar(request):
+    if request.method == 'GET':
+        search = request.GET.get('search')
+        Name = Person.objects.all().filter(Name=search)
+        return render(request, 'searchbar.html', {'Name': Name})
 
 
 

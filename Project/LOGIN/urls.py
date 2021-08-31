@@ -51,6 +51,7 @@ urlpatterns = [
     path('MainMember', views.mainMember, name="MainMember"),
     path('Member',views.member, name="Member"),
     path('MyMember',views.myMember, name="MyMember"),
+    path('searchbar/', views.searchbar, name='searchbar'),
 
     path('Workshop',views.workshop, name="Workshop"),
     path('Booking',views.booking, name="Booking"),
