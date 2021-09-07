@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'LOGIN',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -153,4 +154,4 @@ REST_FRAMEWORK = {
 }
 
 # Default.primary.key.field.type
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

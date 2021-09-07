@@ -49,9 +49,10 @@ urlpatterns = [
     path('MyGroup',views.myGroup, name="MyGroup"),
 
     path('MainMember', views.mainMember, name="MainMember"),
-    path('Member',views.member, name="Member"),
+    path('Member',views.member, name="member"),
+    path('Friendlist',views.friendlist, name="friendlist"),
     path('MyMember',views.myMember, name="MyMember"),
-    path('searchbar/', views.searchbar, name='searchbar'),
+    path('MainSearchbar/', views.MainSearchbar, name='MainSearchbar'),
 
     path('Workshop',views.workshop, name="Workshop"),
     path('Booking',views.booking, name="Booking"),

@@ -48,9 +48,6 @@
           <a class="nav-link active" id="profile-tab" data-bs-toggle="tab" href="{% url 'View' %}" role="tab" aria-controls="profile" aria-selected="true">Profile</a>
          </li>
         </li>
-        <li>
-          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-        </li>
       </ul>
     </div>
   <br/>
@@ -69,13 +66,13 @@
                           </div>
   
                           <div class="col-12">
-                            <a href="{% url 'Member' %}" class="link-primary">Friendlist</a> 
+                            <a href="{% url 'friendlist' %}" class="link-primary">Friendlist</a> 
                           </div><tr></tr>
                           <div class="col-12">
                             <a href="#" class="link-primary">Team Cooperation</a>
                           </div>
                           <br/>
-                          <form action= "{% url 'searchbar' %}" method="get">
+                          <form action= "{% url 'MainSearchbar' %}" method="get">
                             <input type="text" name="search" placeholder="Search member"/>
                             <button type="submit">Search</button>
                         </form>

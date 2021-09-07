@@ -8,6 +8,7 @@ Please install this installer - command
 1. Django - pip install django
 2. MySQL - pip install mysqlclient
 3. Pillow - pip install pillow
+4. Cryptography - pip install cryptography
 
 To run the program, open files and at the link type cmd to open command prompt (cmd)
 

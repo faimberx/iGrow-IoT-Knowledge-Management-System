@@ -10,7 +10,19 @@ from django.urls import reverse
 from django.core.files.storage import FileSystemStorage
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from cryptography.fernet import Fernet
 
+def encryptPassword(Pwd):
+        key = Fernet.generate_key()
+        fernet = Fernet(key)
+        encrypted = fernet.encrypt(Pwd.encode())
+        return encrypted
+
+def deryptPassword(Pwd):
+        key = Fernet.generate_key()
+        fernet = Fernet(key)
+        decrypted = fernet.decrypt(Pwd).decode()
+        return decrypted
 
 def Indexpage(request):
     return render(request,'index.html')
@@ -26,7 +38,7 @@ def homepage(request):
 def UserReg(request):
     if request.method=='POST':
         Email=request.POST['Email']
-        Pwd=request.POST['Pwd']
+        Pwd=encryptPassword(request.POST['Pwd'])
         Username=request.POST.get('Username')
         Name=request.POST.get('Name')
         DateOfBirth=request.POST.get('DateOfBirth')
@@ -45,13 +57,13 @@ def UserReg(request):
         return render(request,'registration.html')
 
 def loginpage(request):
-    if request.method=="POST":
+    if request.method == "POST":
         try:
-            Userdetails=Person.objects.get(Email=request.POST['Email'],Password=request.POST['Pwd'])
-            print("Username",Userdetails)
-            request.session['Email']=Userdetails.Email
-            person = Person.objects.filter(Email=request.POST['Email'])
-            return render(request,'homepage.html',{'person': person})
+            Userdetails = Person.objects.get(Email = request.POST['Email'], Password = deryptPassword(request.POST['Pwd']))
+            print("Username", Userdetails)
+            request.session['Email'] = Userdetails.Email
+            person = Person.objects.filter(Email = request.POST['Email'])
+            return render(request,'homepage.html',{'person' : person})
         except Person.DoesNotExist as e:
             messages.success(request,'Username/Password Invalid..!')
     return render(request,'login.html')
@@ -199,6 +211,13 @@ def member(request):
         return render(request,'member.html')
     else :
         return render(request,'member.html')
+def friendlist(request):
+    #try:
+    #    member=Member.objects.filter(Name=request.session['Name'])
+        return render(request,'friendlist.html')#{'member':member})
+    #except Member.DoesNotExist:
+     #   raise Http404('Data does not exist')
+
 
 def myMember(request):
     #try:
@@ -207,11 +226,11 @@ def myMember(request):
     #except Member.DoesNotExist:
      #   raise Http404('Data does not exist')
 
-def searchbar(request):
+def MainSearchbar(request):
     if request.method == 'GET':
         search = request.GET.get('search')
         Name = Person.objects.all().filter(Name=search)
-        return render(request, 'searchbar.html', {'Name': Name})
+        return render(request, 'MainSearchbar.html', {'Name': Name})
 
 
 
