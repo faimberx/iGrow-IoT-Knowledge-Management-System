@@ -5,7 +5,7 @@ Run your database like Xampp or etc
 For first user command:-
 
 Please install this installer - command
-1. Django - pip install django
+1. Django - pip install django==3.2.13
 2. Django Rest Framework - pip install djangorestframework
 3. MySQL - pip install mysqlclient
 4. Pillow - pip install pillow
